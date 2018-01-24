@@ -1,0 +1,13 @@
+server:
+  port: 8081
+  context-path: /sell
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: aifec
+    password: 123
+    url: jdbc:oracle:thin:@127.0.0.1:1521/XE
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
