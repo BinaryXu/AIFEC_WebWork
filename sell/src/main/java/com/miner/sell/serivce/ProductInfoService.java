@@ -39,4 +39,11 @@ public interface ProductInfoService {
      * @param cartDTOList
      */
     void insertStork(List<CartDTO> cartDTOList);
+
+    /**
+     * 修改上下架状态
+     * @param productId
+     * @return
+     */
+    ProductInfo offSet(String productId);
 }

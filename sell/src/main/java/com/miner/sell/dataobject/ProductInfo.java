@@ -1,10 +1,14 @@
 package com.miner.sell.dataobject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.miner.sell.enums.ProductStatusEnum;
+import com.miner.sell.utils.EnumUtil;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  *
@@ -40,4 +44,14 @@ public class ProductInfo {
 
     /** 对应类目 */
     private Integer categoryType;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum(){
+
+        return EnumUtil.getByCode(productStatus,ProductStatusEnum.class);
+    }
 }

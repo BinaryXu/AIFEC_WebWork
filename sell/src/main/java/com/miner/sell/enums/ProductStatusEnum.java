@@ -3,7 +3,7 @@ package com.miner.sell.enums;
 import lombok.Getter;
 
 @Getter
-public enum ProductStatusEnum {
+public enum ProductStatusEnum implements CodeEnum{
 
     UP(0,"在售"),
     DOWN(1,"下架")

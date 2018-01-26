@@ -2,17 +2,20 @@ package com.miner.sell.serivce.impl;
 
 import com.miner.sell.dataobject.ProductInfo;
 import com.miner.sell.dto.CartDTO;
+import com.miner.sell.enums.PayStatusEnum;
 import com.miner.sell.enums.ProductStatusEnum;
 import com.miner.sell.enums.ResultEnum;
 import com.miner.sell.exception.SellException;
 import com.miner.sell.repository.ProductInfoRepository;
 import com.miner.sell.serivce.ProductInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +24,7 @@ import java.util.List;
  **/
 
 @Service
+@Slf4j
 public class ProductInfoServiceImpl implements ProductInfoService{
 
     @Autowired
@@ -85,5 +89,21 @@ public class ProductInfoServiceImpl implements ProductInfoService{
             repository.save(productInfo);
         }
 
+    }
+
+    @Override
+    public ProductInfo offSet(String productId) {
+        ProductInfo productInfo = repository.findOne(productId);
+        if(productInfo == null){
+            log.error("该商品不存在={}",productId);
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIT);
+        }
+        if(ProductStatusEnum.UP.getCode().equals(productInfo.getProductStatus())){
+            productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        }else {
+            productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        }
+        productInfo.setUpdateTime(new Date());
+        return repository.save(productInfo);
     }
 }
