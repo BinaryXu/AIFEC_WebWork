@@ -3,6 +3,7 @@ package com.miner.sell.controller;
 import com.miner.sell.dto.OrderDTO;
 import com.miner.sell.enums.ResultEnum;
 import com.miner.sell.exception.SellException;
+import com.miner.sell.serivce.OrderService;
 import com.miner.sell.serivce.impl.OrderServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import java.util.Map;
 public class SellOrderController {
 
     @Autowired
-    OrderServiceImpl orderService;
+    OrderService orderService;
 
     /**
      * 获取所有订单

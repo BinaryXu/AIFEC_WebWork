@@ -27,13 +27,13 @@
                         <tr>
                             <td>${productInfo.productId}</td>
                             <td>${productInfo.productName}</td>
-                            <td>${productInfo.productIcon}</td>
+                            <td>${(productInfo.productIcon)!''}</td>
                             <td>${productInfo.productPrice}</td>
                             <td>${productInfo.productStock}</td>
-                            <td>${productInfo.productDescription}</td>
+                            <td>${(productInfo.productDescription)!''}</td>
                             <td>${productInfo.categoryType}</td>
                             <td>${productInfo.createTime}</td>
-                            <td><a href="/sell/product/save?productId=${productInfo.productId}">修改</a></td>
+                            <td><a href="/sell/product/index?productId=${productInfo.productId}">修改</a></td>
                             <td>
                                 <#if productInfo.productStatus == 0>
                                   <a href="/sell/product/off?productId=${productInfo.productId}">下架</a>

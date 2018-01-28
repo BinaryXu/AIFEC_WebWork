@@ -8,6 +8,7 @@ import com.miner.sell.exception.SellException;
 import com.miner.sell.from.OrderForm;
 import com.miner.sell.repository.OrderMasterRepository;
 import com.miner.sell.serivce.BuyerService;
+import com.miner.sell.serivce.OrderService;
 import com.miner.sell.serivce.impl.BuyerServiceImpl;
 import com.miner.sell.serivce.impl.OrderServiceImpl;
 import com.miner.sell.utils.OrderFormToOrderDTOUtil;
@@ -38,10 +39,10 @@ import java.util.Map;
 public class OrderController {
 
     @Autowired
-    OrderServiceImpl orderService;
+    OrderService orderService;
 
     @Autowired
-    BuyerServiceImpl buyerService;
+    BuyerService buyerService;
 
 
     //创建订单

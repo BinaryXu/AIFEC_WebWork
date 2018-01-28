@@ -35,6 +35,10 @@ public enum ResultEnum {
 
     PRODUCT_STATUS_ERROR(23,"商品状态不正确"),
 
+    CATEGORY_NOT_EXIT(24,"商品类目不存在"),
+
+    CATEGORY_ERROR(24,"商品类目操作失败")
+
     ;
 
     private Integer code;
