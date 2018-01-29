@@ -1,4 +1,4 @@
-package com.miner.sell.serivce;
+package com.miner.sell.service;
 
 import com.miner.sell.dto.OrderDTO;
 

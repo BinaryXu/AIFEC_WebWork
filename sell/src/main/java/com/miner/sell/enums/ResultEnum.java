@@ -37,7 +37,9 @@ public enum ResultEnum {
 
     CATEGORY_NOT_EXIT(24,"商品类目不存在"),
 
-    CATEGORY_ERROR(24,"商品类目操作失败")
+    CATEGORY_ERROR(25,"商品类目操作失败"),
+
+    LOGOUT_SUCCESS(26,"登出成功")
 
     ;
 

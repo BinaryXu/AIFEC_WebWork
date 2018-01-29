@@ -1,13 +1,12 @@
-package com.miner.sell.serivce.impl;
+package com.miner.sell.service.impl;
 
 import com.miner.sell.dataobject.ProductInfo;
 import com.miner.sell.dto.CartDTO;
-import com.miner.sell.enums.PayStatusEnum;
 import com.miner.sell.enums.ProductStatusEnum;
 import com.miner.sell.enums.ResultEnum;
 import com.miner.sell.exception.SellException;
 import com.miner.sell.repository.ProductInfoRepository;
-import com.miner.sell.serivce.ProductInfoService;
+import com.miner.sell.service.ProductInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

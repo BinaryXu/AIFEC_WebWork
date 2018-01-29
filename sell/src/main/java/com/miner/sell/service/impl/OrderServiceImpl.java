@@ -1,4 +1,4 @@
-package com.miner.sell.serivce.impl;
+package com.miner.sell.service.impl;
 
 import com.miner.sell.dataobject.OrderDetail;
 import com.miner.sell.dataobject.OrderMaster;
@@ -11,13 +11,11 @@ import com.miner.sell.enums.ResultEnum;
 import com.miner.sell.exception.SellException;
 import com.miner.sell.repository.OrderDetailRepository;
 import com.miner.sell.repository.OrderMasterRepository;
-import com.miner.sell.repository.ProductInfoRepository;
-import com.miner.sell.serivce.OrderService;
-import com.miner.sell.serivce.ProductInfoService;
+import com.miner.sell.service.OrderService;
+import com.miner.sell.service.ProductInfoService;
 import com.miner.sell.utils.KeyUtil;
 import com.miner.sell.utils.OrderMasterToOrderDTOUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,10 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**

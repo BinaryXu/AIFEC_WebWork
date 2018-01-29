@@ -1,7 +1,6 @@
-package com.miner.sell.serivce.impl;
+package com.miner.sell.service.impl;
 
 import com.miner.sell.dataobject.OrderDetail;
-import com.miner.sell.dataobject.OrderMaster;
 import com.miner.sell.dto.OrderDTO;
 import com.miner.sell.enums.OrderStatusEnum;
 import com.miner.sell.enums.PayStatusEnum;
@@ -12,15 +11,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

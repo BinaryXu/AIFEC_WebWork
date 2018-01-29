@@ -26,7 +26,7 @@ public class ProductInfoRepositoryTest {
         productInfo.setCategoryType(2);
         productInfo.setProductDescription("今日爆款");
         productInfo.setProductIcon("http://123.jpg");
-        productInfo.setProductId("6666");
+        productInfo.setProductId("66667");
         productInfo.setProductName("兰州酿皮");
         productInfo.setProductPrice(new BigDecimal("15.6"));
         productInfo.setProductStatus(0);

@@ -3,7 +3,7 @@ package com.miner.sell.controller;
 import com.miner.sell.dataobject.ProductCategory;
 import com.miner.sell.enums.ResultEnum;
 import com.miner.sell.exception.SellException;
-import com.miner.sell.serivce.CategoryService;
+import com.miner.sell.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

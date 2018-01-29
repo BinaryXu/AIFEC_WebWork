@@ -1,10 +1,9 @@
-package com.miner.sell.serivce.impl;
+package com.miner.sell.service.impl;
 
 import com.miner.sell.dto.OrderDTO;
 import com.miner.sell.enums.ResultEnum;
 import com.miner.sell.exception.SellException;
-import com.miner.sell.serivce.BuyerService;
-import com.miner.sell.serivce.OrderService;
+import com.miner.sell.service.BuyerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

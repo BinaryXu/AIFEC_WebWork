@@ -1,8 +1,8 @@
-package com.miner.sell.serivce.impl;
+package com.miner.sell.service.impl;
 
 import com.miner.sell.dataobject.ProductCategory;
 import com.miner.sell.repository.ProductCategoryRepository;
-import com.miner.sell.serivce.CategoryService;
+import com.miner.sell.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
