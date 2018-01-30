@@ -80,5 +80,59 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            提示
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        您有新的订单请注意查收！！！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="javascript:document.getElementById('notice').pause()" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" onclick="location.reload()" class="btn btn-primary">查看详情</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <audio id="notice" loop="loop">
+            <source src="/sell/mp3/123.mp3" type="audio/mpeg" />
+        </audio>
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+        <script>
+            var websocket = null;
+            if('WebSocket' in window){
+                websocket = new WebSocket('ws://127.0.0.1:8081/sell/webSocket');
+            }else{
+                alert('该浏览器不支持webSocket消息推送')
+            }
+            websocket.onopen = function (event) {
+                console.log('连接成功！！！');
+            }
+            websocket.onclose = function (event) {
+                console.log('连接关闭！！！');
+            }
+            websocket.onmessage = function (ev) {
+                console.log('你有新的消息：'+ev.data)
+                //弹出框-播放音乐
+                $('#myModal').modal('show');
+                document.getElementById('notice').play();
+            }
+            websocket.onerror = function (ev) {
+                console.log('websocket通信发生异常！！！')
+            }
+            window.onbeforeunload = function(){
+                websocket.close();
+            }
+
+        </script>
     </body>
 </html>

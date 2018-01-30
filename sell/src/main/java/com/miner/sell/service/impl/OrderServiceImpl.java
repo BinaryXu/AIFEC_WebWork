@@ -13,6 +13,7 @@ import com.miner.sell.repository.OrderDetailRepository;
 import com.miner.sell.repository.OrderMasterRepository;
 import com.miner.sell.service.OrderService;
 import com.miner.sell.service.ProductInfoService;
+import com.miner.sell.service.WebSocket;
 import com.miner.sell.utils.KeyUtil;
 import com.miner.sell.utils.OrderMasterToOrderDTOUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional
@@ -82,6 +86,9 @@ public class OrderServiceImpl implements OrderService {
                 .map(e -> new CartDTO(e.getProductId(),e.getProductQuantity()))
                 .collect(Collectors.toList());
         productInfoService.deductStork(cartDTOList);
+
+        //发送webSocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }
