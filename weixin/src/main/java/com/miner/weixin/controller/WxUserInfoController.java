@@ -52,6 +52,13 @@ public class WxUserInfoController {
     StringRedisTemplate redisTemplate;
 
 
+    /**
+     * 获取二维码
+     * @param wxUserInfoVO
+     * @param bindingResult
+     * @param map
+     * @return
+     */
     @GetMapping(value = "/qrconnect")
     public ModelAndView getQrconnect(@Valid WxUserInfoVO wxUserInfoVO,
                                      BindingResult bindingResult,
@@ -88,12 +95,34 @@ public class WxUserInfoController {
         }
     }
 
+
+
     /**
-     * 获取Code接口
+     * 扫描后调用/返回h5页面（是否授权）
      * @param uuid
      */
     @GetMapping("/confirm")
     public ModelAndView confirm(@RequestParam("uuid")String uuid){
+        if(StringUtils.isEmpty(uuid)){
+            log.error("【获取CODE】uuid不能为空！");
+            throw new WeixinException(ResultEnum.UUID_NULL);
+        }
+        Map<Object, Object> redisMap = redisTemplate.opsForHash().entries(uuid);
+        if(redisMap == null){
+            log.error("【获取Code】二维码未过期或不存在！");
+            throw new WeixinException(ResultEnum.QRCODE_OVER);
+        }
+        return new ModelAndView("");
+
+    }
+
+    /**
+     * 用户授权登录调用（直接跳转小程序主页）
+     * @param uuid
+     * @return
+     */
+    @GetMapping("/confirmLogin")
+    public ModelAndView confirmLogin(@RequestParam("uuid")String uuid){
         if(StringUtils.isEmpty(uuid)){
             log.error("【获取CODE】uuid不能为空！");
             throw new WeixinException(ResultEnum.UUID_NULL);
@@ -108,13 +137,27 @@ public class WxUserInfoController {
         String state = (String)redisMap.get("state");
 
         redisTemplate.opsForValue().set(code,RedisConstant.CONTENT,RedisConstant.EXPIRE,TimeUnit.SECONDS);
-        return new ModelAndView("redirect:"
-                                .concat(redirectUrl)
-                                .concat("?code=")
-                                .concat(code)
-                                .concat("&state=")
-                                .concat(state));
 
+        return new ModelAndView("");
     }
 
+    /**
+     * 用户禁止授权（直接跳转小程序主页）
+     * @param uuid
+     * @return
+     */
+    @GetMapping("/cancelLogin")
+    public ModelAndView cancelLogin(@RequestParam("uuid")String uuid){
+        if(StringUtils.isEmpty(uuid)){
+            log.error("【获取CODE】uuid不能为空！");
+            throw new WeixinException(ResultEnum.UUID_NULL);
+        }
+        Map<Object, Object> redisMap = redisTemplate.opsForHash().entries(uuid);
+        if(redisMap == null){
+            log.error("【获取Code】二维码未过期或不存在！");
+            throw new WeixinException(ResultEnum.QRCODE_OVER);
+        }
+
+        return new ModelAndView("");
+    }
 }
