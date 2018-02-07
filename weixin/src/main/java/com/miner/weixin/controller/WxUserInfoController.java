@@ -10,6 +10,7 @@ import com.miner.weixin.constant.RedisConstant;
 import com.miner.weixin.dataobject.WeixinAppInfo;
 import com.miner.weixin.enums.ResultEnum;
 import com.miner.weixin.exception.WeixinException;
+import com.miner.weixin.service.WebSocket;
 import com.miner.weixin.service.WeixinAppInfoService;
 import com.miner.weixin.utils.BaseUtil;
 import com.miner.weixin.utils.QRCodeUtil;
@@ -51,6 +52,9 @@ public class WxUserInfoController {
     @Autowired
     StringRedisTemplate redisTemplate;
 
+    @Autowired
+    WebSocket webSocket;
+
 
     /**
      * 获取二维码
@@ -81,6 +85,7 @@ public class WxUserInfoController {
                     .concat("/connect/confirm?uuid=")
                     .concat(uuid);
             map.put("qrcode",QRCodeUtil.getQRCode(url));
+            map.put("uuid",uuid);
             Map<String,String> redisMap = new HashMap<>();
             redisMap.put("redirectUrl",wxUserInfoVO.getRedirect_uri());
             redisMap.put("state",wxUserInfoVO.getState());
@@ -112,6 +117,7 @@ public class WxUserInfoController {
             log.error("【获取Code】二维码未过期或不存在！");
             throw new WeixinException(ResultEnum.QRCODE_OVER);
         }
+        webSocket.sendMessage("401",uuid);
         return new ModelAndView("");
 
     }

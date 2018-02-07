@@ -11,4 +11,4 @@ server:
   port: 8082
 
 projectUrl:
-    rootUrl: http://127.0.0.1:8082
+    rootUrl: http://192.168.1.14:8082
