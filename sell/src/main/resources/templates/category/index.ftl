@@ -1,16 +1,17 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>卖家后台管理系统</title>
-        <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+  <#include "../common/header.ftl">
     <body>
-        <div class="container">
+    <div class="container-fluid row">
+    <#--边栏-->
+        <#include "../common/leftMenu.ftl">
+        <div class="col-xs-12 col-md-8">
+        <#--主要内容-->
+            <div class="container pull-right">
             <div class="row clearfix">
                 <div class="container">
                     <div class="row clearfix">
                         <div class="col-md-12 column">
-                            <form role="form" method="GET" action="/sell/category/save">
+                            <form role="form" method="GET" action="/sell/seller/category/save">
                                 <div class="form-group">
                                     <label>类目名称</label>
                                     <input name="categoryName" type="text" class="form-control" value="${(productCategory.categoryName)!''}">

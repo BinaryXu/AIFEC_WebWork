@@ -1,11 +1,12 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>查询订单详情</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<#include "../common/header.ftl">
 <body>
-<div class="container">
+<div class="container-fluid row">
+<#--边栏-->
+        <#include "../common/leftMenu.ftl">
+    <div class="col-xs-12 col-md-8">
+    <#--主要内容-->
+        <div class="container pull-right">
     <div class="row clearfix">
         <div class="col-md-4 column">
             <table class="table">
@@ -53,10 +54,10 @@
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <#if orderDTO.orderStatus == 0>
-                    <a href="/sell/sell/order/finish?orderId=${orderDTO.orderId}" class="btn btn-default btn-info">完结订单</a>
-                    <a href="/sell/sell/order/cancel?orderId=${orderDTO.orderId}" class="btn btn-default btn-danger">取消订单</a>
+                    <a href="/sell/seller/order/finish?orderId=${orderDTO.orderId}" class="btn btn-default btn-info">完结订单</a>
+                    <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}" class="btn btn-default btn-danger">取消订单</a>
                     </#if>
-                    <a href="/sell/sell/order/list" class="btn btn-success btn-info">返回上层</a>
+                    <a href="/sell/seller/order/list" class="btn btn-success btn-info">返回上层</a>
                 </div>
             </div>
         </div>

@@ -17,4 +17,9 @@ public class ProjectUrlConfig {
      * 点餐系统地址
      */
     public String sell;
+
+    /**
+     * 微信登录地址
+     */
+    public String wxUrl;
 }

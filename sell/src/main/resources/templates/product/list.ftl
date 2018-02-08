@@ -1,11 +1,12 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>卖家后台管理系统</title>
-        <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+<#include "../common/header.ftl">
     <body>
-        <div class="container">
+    <div class="container-fluid row">
+    <#--边栏-->
+        <#include "../common/leftMenu.ftl">
+        <div class="col-xs-12 col-md-8">
+        <#--主要内容-->
+            <div class="container pull-right">
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <table class="table">
@@ -33,12 +34,12 @@
                             <td>${(productInfo.productDescription)!''}</td>
                             <td>${productInfo.categoryType}</td>
                             <td>${productInfo.createTime}</td>
-                            <td><a href="/sell/product/index?productId=${productInfo.productId}">修改</a></td>
+                            <td><a href="/sell/seller/product/index?productId=${productInfo.productId}">修改</a></td>
                             <td>
                                 <#if productInfo.productStatus == 0>
-                                  <a href="/sell/product/off?productId=${productInfo.productId}">下架</a>
+                                  <a href="/sell/seller/product/off?productId=${productInfo.productId}">下架</a>
                                   <#else>
-                                  <a href="/sell/product/off?productId=${productInfo.productId}">上架</a>
+                                  <a href="/sell/seller/product/off?productId=${productInfo.productId}">上架</a>
                                 </#if>
                             </td>
                         </tr>
@@ -54,18 +55,18 @@
                             </li>
                         <#else>
                             <li>
-                                <a href="/sell/product/list?page=${currPage-1}&size=${size}">上一页</a>
+                                <a href="/sell/seller/product/list?page=${currPage-1}&size=${size}">上一页</a>
                             </li>
                         </#if>
 
                         <#list 1..productInfoPage.getTotalPages() as index>
                            <#if currPage == index>
                                 <li class="disabled">
-                                    <a href="/sell/product/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/sell/seller/product/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             <#else>
                                 <li>
-                                    <a href="/sell/product/list?page=${index}&size=${size}">${index}</a>
+                                    <a href="/sell/seller/product/list?page=${index}&size=${size}">${index}</a>
                                 </li>
                             </#if>
                         </#list>
@@ -75,7 +76,7 @@
                             </li>
                         <#else>
                              <li>
-                                 <a href="/sell/product/list?page=${currPage+1}&size=${size}">下一页</a>
+                                 <a href="/sell/seller/product/list?page=${currPage+1}&size=${size}">下一页</a>
                              </li>
                         </#if>
                     </ul>

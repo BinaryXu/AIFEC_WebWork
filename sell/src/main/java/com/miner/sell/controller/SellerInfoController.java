@@ -66,7 +66,7 @@ public class SellerInfoController {
         //设置token到Cookie中
         CookieUtil.set(response, CookieConstant.TOKEN,token,expire);
 
-        return new ModelAndView("redirect:"+projectUrlConfig.getSell()+"/sell/order/list");
+        return new ModelAndView("redirect:"+projectUrlConfig.getSell()+"/seller/order/list");
 
     }
 
@@ -85,7 +85,7 @@ public class SellerInfoController {
             CookieUtil.set(response,CookieConstant.TOKEN,null,0);
         }
         map.put("msg",ResultEnum.LOGOUT_SUCCESS.getMessage());
-        map.put("url","/sell/sell/order/list");
+        map.put("url","http://127.0.0.1:8020/aifechtml/aifecIndex.html");
         return new ModelAndView("common/success",map);
     }
 }

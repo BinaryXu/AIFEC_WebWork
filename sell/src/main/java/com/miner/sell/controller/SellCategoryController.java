@@ -21,7 +21,7 @@ import java.util.Map;
  * @create 2018-01-28 19:33
  **/
 @Controller
-@RequestMapping(value = "/category")
+@RequestMapping(value = "/seller/category")
 @Slf4j
 public class SellCategoryController {
 

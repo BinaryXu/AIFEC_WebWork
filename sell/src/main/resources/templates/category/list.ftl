@@ -1,11 +1,12 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>卖家后台管理系统</title>
-        <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+   <#include "../common/header.ftl">
     <body>
-        <div class="container">
+    <div class="container-fluid row">
+    <#--边栏-->
+        <#include "../common/leftMenu.ftl">
+        <div class="col-xs-12 col-md-8">
+        <#--主要内容-->
+            <div class="container pull-right">
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <table class="table">
@@ -27,8 +28,8 @@
                             <td>${(productCategory.categoryType)}</td>
                             <td>${productCategory.createTime}</td>
                             <td>${(productCategory.updateTime)!''}</td>
-                            <td><a href="/sell/category/index?categoryId=${productCategory.categoryId}">修改</a></td>
-                            <td><a href="/sell/category/delete?categoryId=${productCategory.categoryId}">删除</a></td>
+                            <td><a href="/sell/seller/category/index?categoryId=${productCategory.categoryId}">修改</a></td>
+                            <td><a href="/sell/seller/category/delete?categoryId=${productCategory.categoryId}">删除</a></td>
                         </tr>
                         </#list>
                         </tbody>

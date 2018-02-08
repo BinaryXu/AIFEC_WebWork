@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -18,8 +19,9 @@ import java.util.Date;
  **/
 @Entity
 @Data
-public class ProductInfo {
+public class ProductInfo implements Serializable {
 
+    private static final long serialVersionUID = -9016446728664253110L;
     /**  商品ID. */
     @Id
     private String productId;

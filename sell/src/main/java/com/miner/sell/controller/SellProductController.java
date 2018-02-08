@@ -33,7 +33,7 @@ import java.util.Map;
  * @create 2018-01-26 20:16
  **/
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/seller/product")
 @Slf4j
 public class SellProductController {
 

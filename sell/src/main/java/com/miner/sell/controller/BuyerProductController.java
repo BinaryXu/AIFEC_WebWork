@@ -10,8 +10,10 @@ import com.miner.sell.service.ProductInfoService;
 import com.miner.sell.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -34,7 +36,8 @@ public class BuyerProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    private ResultVO<Map<String,String>> getProdutList(){
+    @Cacheable(cacheNames = "product",key = "#sellerId", condition = "#sellerId.length()>3",unless = "#result.getCode() != 0")
+    public ResultVO<Map<String,String>> getProdutList(@RequestParam("sellerId") String sellerId){
 
         //1.获取在售商品列表
         List<ProductInfo> productInfoList = productInfoService.findUpAll();

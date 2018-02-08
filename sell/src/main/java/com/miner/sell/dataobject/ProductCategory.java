@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ import java.util.Date;
  **/
 @Entity
 @Data
-public class ProductCategory {
+public class ProductCategory implements Serializable{
 
+    private static final long serialVersionUID = -4998554180829318126L;
     /** 类目ID */
     @Id
     @GeneratedValue
