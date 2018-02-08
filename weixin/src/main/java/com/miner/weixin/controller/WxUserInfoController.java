@@ -14,6 +14,8 @@ import com.miner.weixin.service.WebSocket;
 import com.miner.weixin.service.WeixinAppInfoService;
 import com.miner.weixin.utils.BaseUtil;
 import com.miner.weixin.utils.QRCodeUtil;
+import com.miner.weixin.utils.ResultVOUtil;
+import com.miner.weixin.vo.ResultVO;
 import com.miner.weixin.vo.WxUserInfoVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,15 +101,12 @@ public class WxUserInfoController {
             throw new WeixinException(ResultEnum.QRCODE_ERROR);
         }
     }
-
-
-
     /**
      * 扫描后调用/返回h5页面（是否授权）
      * @param uuid
      */
     @GetMapping("/confirm")
-    public ModelAndView confirm(@RequestParam("uuid")String uuid){
+    public ModelAndView confirm(@RequestParam("uuid")String uuid,Map<String,String> map){
         if(StringUtils.isEmpty(uuid)){
             log.error("【获取CODE】uuid不能为空！");
             throw new WeixinException(ResultEnum.UUID_NULL);
@@ -118,8 +117,9 @@ public class WxUserInfoController {
             throw new WeixinException(ResultEnum.QRCODE_OVER);
         }
         webSocket.sendMessage("401",uuid);
-        return new ModelAndView("");
-
+        map.put("confirm",projectUrlConfig.getRootUrl()+"/connect/confirmLogin?uuid="+uuid);
+        map.put("cancel",projectUrlConfig.getRootUrl()+"/connect/cancelLogin?uuid="+uuid);
+        return new ModelAndView("qrcode/confirm",map);
     }
 
     /**
@@ -128,7 +128,7 @@ public class WxUserInfoController {
      * @return
      */
     @GetMapping("/confirmLogin")
-    public ModelAndView confirmLogin(@RequestParam("uuid")String uuid){
+    public ResultVO confirmLogin(@RequestParam("uuid")String uuid){
         if(StringUtils.isEmpty(uuid)){
             log.error("【获取CODE】uuid不能为空！");
             throw new WeixinException(ResultEnum.UUID_NULL);
@@ -141,10 +141,14 @@ public class WxUserInfoController {
         String code = BaseUtil.getUUID();
         String redirectUrl = (String)redisMap.get("redirectUrl");
         String state = (String)redisMap.get("state");
+        //1.用户点击确认授权
+        //2.返回第三方服务器Code
 
         redisTemplate.opsForValue().set(code,RedisConstant.CONTENT,RedisConstant.EXPIRE,TimeUnit.SECONDS);
 
-        return new ModelAndView("");
+        redirectUrl = redirectUrl+"?code="+code+"&state="+state;
+        webSocket.sendMessage(redirectUrl,uuid);
+        return ResultVOUtil.success();
     }
 
     /**
@@ -153,7 +157,7 @@ public class WxUserInfoController {
      * @return
      */
     @GetMapping("/cancelLogin")
-    public ModelAndView cancelLogin(@RequestParam("uuid")String uuid){
+    public ResultVO cancelLogin(@RequestParam("uuid")String uuid){
         if(StringUtils.isEmpty(uuid)){
             log.error("【获取CODE】uuid不能为空！");
             throw new WeixinException(ResultEnum.UUID_NULL);
@@ -164,6 +168,6 @@ public class WxUserInfoController {
             throw new WeixinException(ResultEnum.QRCODE_OVER);
         }
 
-        return new ModelAndView("");
+        return ResultVOUtil.success();
     }
 }

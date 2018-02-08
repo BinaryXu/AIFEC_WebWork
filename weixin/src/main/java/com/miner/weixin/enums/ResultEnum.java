@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ResultEnum {
+    SUCCESS(0000,"交易成功"),
     VALID_ERROR(1003,"验证失败"),
     APPID_ERROR(1004,"APPID参数不正确"),
     QRCODE_ERROR(1005,"二维码生成异常"),

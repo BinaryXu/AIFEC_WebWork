@@ -39,7 +39,7 @@
                 $("#des").text('扫描成功,请点击确认即可登录');
                 break;
             default:
-
+                window.location.href=ev.data;
         }
     }
     websocket.onerror = function (ev) {
